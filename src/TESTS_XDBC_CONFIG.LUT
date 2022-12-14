@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<lookupTable>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.company.bo.UpdateCompanyRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"UPDATE Sample.Company SET TaxID = ? WHERE ID = ?"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.person.bo.PersonSetsRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"? = CALL Sample.PersonSets(?,?)"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"SELECT * FROM Sample.Person"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryStreamRequest">{
+	"credential":"ENSEMBLE Samples",	
+	"statement":"SELECT * FROM Sample.Employee"
+}
+</entry>
+</lookupTable>

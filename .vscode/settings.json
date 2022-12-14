@@ -1,0 +1,7 @@
+{
+	"objectscript.conn": {
+		"server": "default~ensemble",
+		"ns": "INTEROPWAY_XDBC",
+		"active": true
+	}
+}

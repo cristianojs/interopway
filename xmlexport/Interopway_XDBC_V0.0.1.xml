@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2018.1.5 (Build 659U)" ts="2022-12-13 10:12:08">
+<Project name="Interopway_XDBC" LastModified="2022-12-11 19:18:06.704663">
+  <Items>
+    <ProjectItem name="TESTS_XDBC_CONFIG.LUT" type="LUT"></ProjectItem>
+    <ProjectItem name="cjs.interopway.samples.InteropProducion" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.samples.company.bo.UpdateCompanyRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.samples.company.bo.UpdateCompanyResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.samples.person.bo.PersonSetsRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.samples.person.bo.PersonSetsResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.tests.InteropProduction" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.BaseRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.BaseResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.Operation" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.ParameterDefinition" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.ProcedureRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.ProcedureResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.QueryRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.QueryResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.QueryStreamRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.QueryStreamResponse" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.UpdateRequest" type="CLS"></ProjectItem>
+    <ProjectItem name="cjs.interopway.xdbc.bo.UpdateResponse" type="CLS"></ProjectItem>
+  </Items>
+</Project>
+
+
+<Class name="cjs.interopway.samples.InteropProducion">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2022-12-11 - Cristiano José da Silva</b><br/>
+Production that show how to use the XDBC classes to with few line of code e and 
+configurations, to achieve a database interoperability.
+</p>]]></Description>
+<Super>Ens.Production</Super>
+<TimeChanged>66455,55866.3247339</TimeChanged>
+<TimeCreated>66454,60827.585081</TimeCreated>
+
+<XData name="ProductionDefinition">
+<Data><![CDATA[
+<Production Name="cjs.interopway.samples.InteropProducion" TestingEnabled="true" LogGeneralTraceEvents="true">
+  <Description>Production for test XDBC and REST components</Description>
+  <ActorPoolSize>2</ActorPoolSize>
+  <Item Name="ODBC Sample Operation" Category="" ClassName="cjs.interopway.xdbc.bo.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Adapter" Name="DSN">ENSEMBLE Samples</Setting>
+    <Setting Target="Adapter" Name="StayConnected">0</Setting>
+  </Item>
+  <Item Name="JDBC Sample Operation" Category="" ClassName="cjs.interopway.xdbc.bo.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Adapter" Name="DSN">jdbc:Cache://127.0.0.1:56773/SAMPLES</Setting>
+    <Setting Target="Adapter" Name="JDBCDriver">com.intersys.jdbc.CacheDriver</Setting>
+    <Setting Target="Adapter" Name="JGService">EnsLib.JavaGateway.Service</Setting>
+    <Setting Target="Adapter" Name="StayConnected">0</Setting>
+  </Item>
+  <Item Name="EnsLib.JavaGateway.Service" Category="" ClassName="EnsLib.JavaGateway.Service" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Host" Name="ClassPath">C:\InterSystems\Ensemble\dev\java\lib\JDK18\cache-db-2.0.0.jar;C:\InterSystems\Ensemble\dev\java\lib\JDK18\cache-jdbc-2.0.0.jar</Setting>
+  </Item>
+</Production>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="cjs.interopway.samples.company.bo.UpdateCompanyRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+	<b>2022-12-11 - Cristiano José da Silva</b><br/>
+	Request to update a record from the table Sample.Company
+</p>]]></Description>
+<Import>cjs.interopway.xdbc.bo</Import>
+<Super>UpdateRequest</Super>
+<TimeChanged>66455,57944.0504522</TimeChanged>
+<TimeCreated>66454,67957.771152</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Type>STRING</Type>
+<Default>cjs.interopway.samples.company.bo.UpdateCompanyResponse</Default>
+</Parameter>
+
+<Method name="GetInstance">
+<Description><![CDATA[
+Create a new Instance of <class>cjs.interopway.samples.person.bo.UpdateCompanyRequest</class>. Set parameters and return.]]></Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>companyId:%Integer,taxId:%String</FormalSpec>
+<ReturnType>UpdateCompanyRequest</ReturnType>
+<Implementation><![CDATA[
+	#Dim updateRequest			As UpdateCompanyRequest	= ..%New("TESTS_XDBC_CONFIG")
+	//	
+	Do updateRequest.Parameters.Insert(##Class(ParameterDefinition).%New(1, taxId))
+	Do updateRequest.Parameters.Insert(##Class(ParameterDefinition).%New(2, companyId))
+	//
+	Return updateRequest
+]]></Implementation>
+</Method>
+
+</Class>
+
+
+<Class name="cjs.interopway.samples.company.bo.UpdateCompanyResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2022-12-11 - Cristiano José da Silva</b><br/>
+Response from updated record from the table Sample.Company
+</p>]]></Description>
+<Super>cjs.interopway.xdbc.bo.UpdateResponse</Super>
+<TimeChanged>66455,33833.3056749</TimeChanged>
+<TimeCreated>66454,67957.771152</TimeCreated>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.samples.person.bo.PersonSetsRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+	<b>2022-12-11 - Cristiano José da Silva</b><br/>
+	Request to call the stored procedure ? = CALL Sample.PersonSets('?','?')
+</p>]]></Description>
+<Import>cjs.interopway.xdbc.bo</Import>
+<IncludeCode>EnsSQLTypes</IncludeCode>
+<Super>ProcedureRequest</Super>
+<TimeChanged>66455,61938.1092953</TimeChanged>
+<TimeCreated>66454,67957.771152</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Type>STRING</Type>
+<Default>cjs.interopway.samples.person.bo.PersonSetsResponse</Default>
+</Parameter>
+
+<Method name="GetInstance">
+<Description><![CDATA[
+Create a new Instance of <class>cjs.interopway.samples.person.bo.PersonSetsRequest</class>.
+Set, describe parameters and return.]]></Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>name:%Integer,state:%String</FormalSpec>
+<ReturnType>PersonSetsRequest</ReturnType>
+<Implementation><![CDATA[
+	#Dim procedureRequest	As UpdateCompanyRequest	= ..%New("TESTS_XDBC_CONFIG")	
+	#Dim returnParameter	As ParameterDefinition	= ##Class(ParameterDefinition).%New(1)
+	#Dim nameParameter		As ParameterDefinition	= ##Class(ParameterDefinition).%New(2, name)
+	#Dim stateParameter		As ParameterDefinition	= ##Class(ParameterDefinition).%New(3, state)
+	//
+	Set returnParameter.IOType	= returnParameter.IOTypeDisplayToLogical("OUTPUT")
+	Set nameParameter.IOType		= nameParameter.IOTypeDisplayToLogical("INPUT")
+	Set stateParameter.IOType		= stateParameter.IOTypeDisplayToLogical("INPUT")
+	Set returnParameter.SqlType	= $$$SqlInteger
+	Set nameParameter.SqlType		= $$$SqlVarchar
+	Set stateParameter.SqlType	= $$$SqlVarchar
+	//
+	Do procedureRequest.Parameters.Insert(returnParameter)
+	Do procedureRequest.Parameters.Insert(nameParameter)
+	Do procedureRequest.Parameters.Insert(stateParameter)
+	//
+	Return procedureRequest
+]]></Implementation>
+</Method>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.samples.person.bo.PersonSetsResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2022-12-11 - Cristiano José da Silva</b><br/>
+Response from call of the stored procedure Sample.PersonSets
+</p>]]></Description>
+<Super>cjs.interopway.xdbc.bo.ProcedureResponse</Super>
+<TimeChanged>66455,39934.1220295</TimeChanged>
+<TimeCreated>66454,67957.771152</TimeCreated>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.tests.InteropProduction">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2022-12-11 - Cristiano José da Silva</b><br/>
+Tests set for Business Opeation class: <class>Operation</class><br/><br/>
+
+The tests are executed aganist a Ensemble ODBC/JDBC conection in namespace SAMPLES.
+</p>]]></Description>
+<Import>cjs.interopway.xdbc.bo,cjs.interopway.samples.person.bo,cjs.interopway.samples.company.bo</Import>
+<Super>%UnitTest.TestProduction</Super>
+<TimeChanged>66455,62153.8391494</TimeChanged>
+<TimeCreated>66454,67184.049005</TimeCreated>
+
+<Parameter name="PRODUCTION">
+<Description>
+Class name of the production.  It must contain the production class name.</Description>
+<Type>STRING</Type>
+<Default>cjs.interopway.samples.InteropProducion</Default>
+</Parameter>
+
+<Method name="TestExecuteQueryODBC">
+<Description>
+TestMethod for Business Operation Method ExecuteQuery using a ODBC connection</Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		Return ..ExecuteQuery("ODBC Sample Operation")
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteQueryJDBC">
+<Description>
+TestMethod for Business Operation Method ExecuteQuery using a JODBC connection</Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		Return ..ExecuteQuery("JDBC Sample Operation")
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteQueryStreamODBC">
+<Description>
+TestMethod for Business Operation Method ExecuteQueryStream using a ODBC connection</Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		Return ..ExecuteQueryStream("ODBC Sample Operation")
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteQueryStreamJDBC">
+<Description>
+TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connection</Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		Return ..ExecuteQueryStream("JDBC Sample Operation")
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteUpdateODBC">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	TestMethod for Business Operation Method ExecuteUpdate using a ODBC connection.
+	<br/>
+	This test show how to use parameter in the UPDATE statement without describe the parameter.
+</p>]]></Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		#Dim updateRequest As UpdateCompanyRequest = ##Class(UpdateCompanyRequest).GetInstance(1, "TaxODBC")
+		//
+		Return ..ExecuteUpdate("ODBC Sample Operation", updateRequest)
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteUpdateJDBC">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	TestMethod for Business Operation Method ExecuteUpdate using a JDBC connection.
+	<br/>
+	This test show how to use parametesr in the UPDATE statement without describe the parameters.
+</p>]]></Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		#Dim updateRequest As UpdateCompanyRequest = ##Class(UpdateCompanyRequest).GetInstance(2, "TaxJDBC")
+		//
+		Return ..ExecuteUpdate("JDBC Sample Operation", updateRequest)
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteProcedureODBC">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	TestMethod for Business Operation Method ExecuteProcedue using a ODBC connection.
+	<br/>
+	This test show how to use parameters in the Procedure statement describing the parameters.
+</p>]]></Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		#Dim procedureRequest As PersonSetsRequest = ##Class(PersonSetsRequest).GetInstance("A", "NY")
+		//
+		Return ..ExecuteProcedure("ODBC Sample Operation", procedureRequest)
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="TestExecuteProcedureJDBC">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	TestMethod for Business Operation Method ExecuteProcedue using a JDBC connection.
+	<br/>
+	This test show how to use parameters in the Procedure statement describing the parameters.
+</p>]]></Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = ..IsProductionRunning()
+	If ($System.Status.IsOK(statusCode))
+	{
+		#Dim procedureRequest As PersonSetsRequest = ##Class(PersonSetsRequest).GetInstance("A", "NY")
+		//
+		Return ..ExecuteProcedure("JDBC Sample Operation", procedureRequest)
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteQuery">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	Test for Business Operation Method <b>ExecuteQuery</b>. Send a request to Business Operation received
+  on parameter: <b>targetBusinessOperation</b> that should be: "ODBC Sample Operation" or "JDBC Sample Operation"
+  <br/>
+	This test use the request class: <class>QueryRequest</class> and the Lookup Table: 
+  <b>TESTS_XDBC_CONFIG</b>
+	<br/><br/>
+	The test consist in run the select statement bellow:
+	<br/><br/>
+	<example>
+		SELECT * FROM Sample.Person
+	<example>
+/// <p style='text-align: justify;'>]]></Description>
+<FormalSpec>targetBusinessOperation:%String</FormalSpec>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode	As %Status						= $System.Status.OK()
+	#Dim exception	As %Exception.General	= ""
+	Try 
+	{
+		#Dim queryRequest		As QueryRequest 	= ##Class(QueryRequest).%New("TESTS_XDBC_CONFIG")
+		#Dim queryResponse	As QueryResponse = ""
+		//
+		Set statusCode = ##Class(EnsLib.Testing.Service).SendTestRequest(targetBusinessOperation, queryRequest, .queryRequest,, 1)
+		//
+		Do $$$AssertStatusOK(statusCode, "Status Code from ExecuteQuery")
+		Do $$$AssertEquals(queryResponse.Snapshots.GetAt(1).RowCount, 200, "Total of rows returned from: "_ queryRequest.Statement)
+	}
+	Catch (exception)
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteQueryStream">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	Test for Business Operation Method <b>ExecuteQueryStream</b>. Send a request to Business Operation received
+  on parameter: <b>targetBusinessOperation</b> that should be: "ODBC Sample Operation" or "JDBC Sample Operation"
+  <br/>
+	This test use the request class: <class>QueryStreamRequest</class> and the Lookup Table: <b>TESTS_XDBC_CONFIG</b>
+	<br/><br/>
+	The test consist in run the select statement bellow:
+	<br/><br/>
+	<example>
+		SELECT * FROM Sample.Employee
+	<example>
+/// <p style='text-align: justify;'>]]></Description>
+<FormalSpec>targetBusinessOperation:%String</FormalSpec>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode	As %Status						= $System.Status.OK()
+	#Dim exception	As %Exception.General	= ""
+	Try 
+	{
+		#Dim queryStreamRequest		As QueryStreamRequest		= ##Class(QueryStreamRequest).%New("TESTS_XDBC_CONFIG")
+		#Dim queryStreamResponse	As QueryStreamResponse	= ""
+		//
+		Do queryStreamRequest.ColumnNumbers.Insert(7)
+		Do queryStreamRequest.ColumnNumbers.Insert(8)
+		//
+		Set statusCode = ##Class(EnsLib.Testing.Service).SendTestRequest(targetBusinessOperation, queryStreamRequest, .queryStreamResponse,, 1)
+		//
+		Do $$$AssertStatusOK(statusCode, "Status Code from ExecuteQueryStream")
+		Do $$$AssertEquals(queryStreamResponse.Snapshots.GetAt(1).RowCount, 100, "Total of rows returned from: "_ queryStreamResponse.Statement)
+		Do ..LogMessage("Some data of stream 1" _ queryStreamResponse.Streams.GetAt(1).Read(10) _ "...")
+		Do ..LogMessage("Some data of stream 2" _ queryStreamResponse.Streams.GetAt(2).Read(10)  _ "...")
+	}
+	Catch (exception)
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteUpdate">
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	Test for Business Operation Method <b>ExecuteQuery</b>. Invoque the Business Operation: <b>ODBC Samples Operation</b>
+  <br/>
+	This test use the request class: <class>UpdateCompanyRequest</class> derived from
+	<class>UpdateRequest</class> and the Lookup Table: <b>TESTS_XDBC_CONFIG</b>
+	<br/><br/>
+	The test consist in run the select statement bellow:
+	<br/><br/>
+	<example>
+		UPDATE Sample.Person SET TaxID = '?' WHERE ID = ?
+	<example>
+/// <p style='text-align: justify;'>]]></Description>
+<FormalSpec>targetBusinessOperation:%String,updateRequest:UpdateCompanyRequest</FormalSpec>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode	As %Status						= $System.Status.OK()
+	#Dim exception	As %Exception.General	= ""
+	Try 
+	{		
+		#Dim updateResponse	As UpdateCompanyResponse = ""		
+		//
+		Set statusCode = ##Class(EnsLib.Testing.Service).SendTestRequest(targetBusinessOperation, updateRequest, .updateResponse,, 1)
+		//
+		Do $$$AssertStatusOK(statusCode, "Status Code from ExecuteUpdate")
+		Do $$$AssertEquals(updateResponse.RowsAfecteds, 1, "Total of rows afecteds : "_ updateResponse.RowsAfecteds)
+	}
+	Catch (exception)
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteProcedure">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+	Test for Business Operation Method <b>ExecuteProcedure</b>. Invoque the Business Operation: <b>ODBC Samples Operation
+  </b><br/>
+	This test use the request class: <class>ProcedureRequest</class> and the Lookup Table: <b>TESTS_XDBC_CONFIG</b>
+	<br/><br/>
+	The test consist in run the select statement bellow:
+	<br/><br/>
+	<example>
+		CALL Sample.PersonSets('A','NY')
+	<example>
+/// <p style='text-align: justify;'>]]></Description>
+<FormalSpec>targetBusinessOperation:%String,procedureRequest:PersonSetsRequest</FormalSpec>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode	As %Status						= $System.Status.OK()
+	#Dim exception	As %Exception.General	= ""
+	Try 
+	{
+		#Dim procedureResponse	As PersonSetsResponse	= ""
+		//
+		Set statusCode = ##Class(EnsLib.Testing.Service).SendTestRequest(targetBusinessOperation, procedureRequest, .procedureResponse,, 1)
+		//
+		Do $$$AssertStatusOK(statusCode, "Status Code from ExecuteProcedure")
+		Do $$$AssertEquals(procedureResponse.Snapshots.GetAt(1).RowCount, 2, "Total of rows returned from resultset 1: " _ procedureResponse.Snapshots.GetAt(1).RowCount)
+		Do $$$AssertEquals(procedureResponse.Snapshots.GetAt(2).RowCount, 5, "Total of rows returned from resultset 2: " _ procedureResponse.Snapshots.GetAt(2).RowCount)
+	}
+	Catch (exception)
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="IsProductionRunning">
+<Description>
+I do not know why, in test executions, the Production does not start, then 
+I check if Production is running, in case of Production is stopped I start it.</Description>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status = $System.Status.OK()
+	If ('##Class(Ens.Director).IsProductionRunning())
+	{
+		Do ..LogMessage("Production stopped! Starting...")
+		Do $$$AssertStatusOK(##Class(Ens.Director).StartProduction(), "Status start Production!")
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.BaseRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+	<b>2020-06-17 - Cristiano José da Silva</b><br/>
+	Base request to the Business Operation <class>cjs.interopway.xdbc.bo.Operation<class/><br/>
+	This class can not be instantiated. Useone of the following subclasses:<br>
+	<ul>
+		<li><class>cjs.interopway.xdbc.bo.ProcedureRequest</class> - To execute StroredProcedures/Functions<li>
+		<li><class>cjs.interopway.xdbc.bo.QueryRequest</class> - To execute SELECT statements<li>
+		<li><class>cjs.interopway.xdbc.bo.QueryStreamRequest</class> - To execute SELECT statements that return BLOB/CLOB<li>
+		<li><class>cjs.interopway.xdbc.bo.UpdateRequest</class> - To execute INSERT/UPDATE/DELETE statements<li>
+	</ul>
+</p>]]></Description>
+<Abstract>1</Abstract>
+<Super>%Persistent,Ens.Request</Super>
+<TimeChanged>66455,57217.413863</TimeChanged>
+<TimeCreated>66454,47577.860617</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Type>STRING</Type>
+<Default>cjs.interopway.xdbc.bo.BaseResponse</Default>
+</Parameter>
+
+<Property name="Statement">
+<Description>
+SQL Statement to be executed.</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN"/>
+</Property>
+
+<Property name="Credential">
+<Description>
+Name of the credential used to connect to a external database.</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="50"/>
+</Property>
+
+<Property name="DSN">
+<Description><![CDATA[
+For ODBC connections the DNS contigurated to access the external database.<br>
+For JDBC connections the connection string to to access the external database.]]></Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN"/>
+</Property>
+
+<Property name="Parameters">
+<Description>
+List of paramters used in the SQL Statement</Description>
+<Type>cjs.interopway.xdbc.bo.ParameterDefinition</Type>
+<Collection>list</Collection>
+</Property>
+
+<Method name="GetParameters">
+<Description>
+Create a memory array with parameter description and the io specifaction.</Description>
+<FormalSpec>*array,*io:%String</FormalSpec>
+<Implementation><![CDATA[
+	#Dim indiexParmaters As %Integer	= 0
+	//
+	Set array = ..Parameters.Count()
+	For indiexParmaters = 1 : 1 : array
+	{
+		Do ..Parameters.GetAt(indiexParmaters).GetDefinition(.array, .io)
+	}
+]]></Implementation>
+</Method>
+
+<Method name="%OnNew">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+Return a new instance of the message, look for the settings in the Lookup Table received in the parameter lookupTable. 
+The key of table is the fully qualified name of the request class.
+<pre>
+{
+  dsn:"DSN name of ODBC connection or connection string of JDBC connection", 
+  statement:"SQL statement to be executed", 
+  credential:"Credential name configurated in the SMP"
+}
+</pre>
+</p>]]></Description>
+<FormalSpec>lookupTable:%String="XDBC"</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim exception	As %Exception.General = ""
+	#Dim statusCode	As %Status						= $System.Status.OK()
+	Try 
+	{
+		#Dim configString	As %String = ##Class(Ens.Util.FunctionSet).Lookup(lookupTable, $ClassName())
+		If (configString = "")
+		{
+			Return statusCode
+		}
+		#Dim config As %DynamicObject = {}.%FromJSON(configString)
+		If (config.credential '= "" && '##Class(Ens.Config.Credentials).%ExistsId(config.credential))
+		{
+			Return $System.Status.Error(5001, "Credential does not exists.")
+		}
+		If (config.credential '= "")
+		{
+			Set ..Credential	= config.credential
+		}
+		If (config.statement '= "")
+		{
+			Set ..Statement	= config.statement
+		}
+		If (config.dsn '= "")
+		{
+			Set ..DSN	= config.dsn
+		}				
+	}
+	Catch (exception) 
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.BaseResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-05-11 - Cristiano José da Silva</b><br/>
+</p>]]></Description>
+<Super>%Persistent,Ens.Response</Super>
+<TimeChanged>66456,30852.239446</TimeChanged>
+<TimeCreated>66454,47577.871526</TimeCreated>
+
+<Property name="Snapshots">
+<Description>
+List of snapshots returned by statement execution</Description>
+<Type>EnsLib.SQL.Snapshot</Type>
+<Collection>list</Collection>
+</Property>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.Operation">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-05-11 - Cristiano José da Silva</b><br/>
+Generic Business Operation to use XDBC connections.
+</p>]]></Description>
+<Super>Ens.BusinessOperation</Super>
+<TimeChanged>66456,30683.3598727</TimeChanged>
+<TimeCreated>66454,47578.321506</TimeCreated>
+
+<Parameter name="ADAPTER">
+<Default>EnsLib.SQL.OutboundAdapter</Default>
+</Parameter>
+
+<Property name="Adapter">
+<Type>EnsLib.SQL.OutboundAdapter</Type>
+</Property>
+
+<Parameter name="INVOCATION">
+<Default>Queue</Default>
+</Parameter>
+
+<Parameter name="SETTINGS">
+<Default>MaxRowsToGet</Default>
+</Parameter>
+
+<Property name="MaxRowsToGet">
+<Description>
+Max rows to get at once</Description>
+<Type>%Integer</Type>
+<InitialExpression>10000</InitialExpression>
+</Property>
+
+<Method name="ExecuteQuery">
+<Description><![CDATA[
+Executes SELECT and returns a instance of <class>EnsLib.SQL.Snapshot</class>]]></Description>
+<FormalSpec>request:cjs.interopway.xdbc.bo.QueryRequest,*response:cjs.interopway.xdbc.bo.QueryResponse</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status						= $System.Status.OK()
+	#Dim exception  As %Exception.General	= ""    
+	Try
+	{
+	  Set statusCode = request.NewResponse(.response)
+	  If ($System.Status.IsError(statusCode))
+	  {
+			Return statusCode
+	  }
+	  Do ..CheckConnection(request)
+	  //
+	  #Dim rs 				As EnsLib.SQL.GatewayResultSet  = ""
+	  #Dim parameters	As %String											= ""
+		If (request.Parameters.Count())
+		{
+			Do request.GetParameters(.parameters)
+			//
+			Set statusCode = ..Adapter.ExecuteQueryParamArray(.rs, request.Statement, .parameters)
+		}
+		Else
+		{
+			Set statusCode = ..Adapter.ExecuteQuery(.rs, request.Statement)
+		}
+	  If ($System.Status.IsError(statusCode))
+	  {               
+			Return statusCode
+	  }
+	  #Dim snapshot As EnsLib.SQL.Snapshot = ##Class(EnsLib.SQL.Snapshot).%New()
+	  //
+	  Set snapshot.MaxRowsToGet	= ..MaxRowsToGet
+	  Set statusCode            = rs.GetSnapshot(.snapshot, 1)
+	  If ($System.Status.IsError(statusCode))
+	  {               
+			Return statusCode
+	  }
+	  Do response.Snapshots.Insert(snapshot)
+	}
+	Catch (exception)
+	{
+		Set statusCode = exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteQueryStream">
+<Description>
+Executes a SELECT that returns a stream data (CLOB or BLOB)</Description>
+<FormalSpec>request:cjs.interopway.xdbc.bo.QueryStreamRequest,*response:cjs.interopway.xdbc.bo.QueryStreamResponse</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim exception  As %Exception.General	= ""    
+	Try
+	{
+	  Set statusCode = ..ExecuteQuery(request, .response)
+	  If ($System.Status.IsError(statusCode))
+		{
+			Return statusCode
+		}
+		#Dim rs As EnsLib.SQL.GatewayResultSet = response.Snapshots.GetAt(1)
+	  If (rs.Next())
+	  {
+			#Dim columnIndex	As %Integer = 0
+			For columnIndex = 1 : 1 : request.ColumnNumbers.Size
+			{
+				#Dim stream	As %Stream.Object = ""
+				If (rs.GetColumnIsBinary(columnIndex))
+				{
+					Set stream = ##Class(%Stream.GlobalBinary).%New()
+					//
+					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
+	  			Do response.BinaryStreams.Insert(stream)
+				}
+				Else
+				{
+					Set stream = ##Class(%Stream.GlobalCharacter).%New()
+					//
+					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
+	  			Do response.CharacterStreams.Insert(stream)
+				}				
+			}
+	  }
+	} 
+	Catch (exception)
+	{
+		Set statusCode	= exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteProcedure">
+<Description>
+Executa Procedures ou Functions</Description>
+<FormalSpec>request:cjs.interopway.xdbc.bo.ProcedureRequest,*response:cjs.interopway.xdbc.bo.ProcedureResponse</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim exception  As %Exception.General	= ""    
+	Try
+	{
+	  Set statusCode = request.NewResponse(.response)
+		If ($System.Status.IsError(statusCode))
+		{
+			Return statusCode
+		}
+		Do ..CheckConnection(request)		
+		If (request.Parameters.Count())
+		{
+			#Dim parameters	As %String	= ""
+			#Dim io					As %String	= ""
+			Do request.GetParameters(.parameters, .io)
+			//
+			#Dim snapshots	As %ListOfObjects		= ""
+			#Dim outputs		As %ListOfDataTypes	= ""
+			//
+			Set statusCode = ..Adapter.ExecuteProcedureParmArray(.snapshots, .outputs, request.Statement, io, .parameters)
+		}
+		Else
+		{
+			Set statusCode = ..Adapter.ExecuteProcedure(.snapshots, .outputs, request.Statement)
+		}
+		If ($System.Status.IsError(statusCode))
+	  {
+			Return statusCode
+	  }
+	  Set response.Snapshots	= snapshots
+	  Set response.Outputs		= outputs
+	} 
+	Catch (exception)
+	{
+		Set statusCode	= exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="ExecuteUpdate">
+<Description>
+Executes INSERT/UPDATE/DELETE</Description>
+<FormalSpec>request:cjs.interopway.xdbc.bo.UpdateRequest,*response:cjs.interopway.xdbc.bo.UpdateResponse</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim exception  As %Exception.General	= ""    
+	Try
+	{	    
+	  Set statusCode = request.NewResponse(.response)
+	  If ($System.Status.IsError(statusCode))
+	  {
+			Return statusCode
+	  }
+	  Do ..CheckConnection(request)
+	  //
+	  #Dim rowsAfecteds	As %ListOfDataTypes	= ""
+		If (request.Parameters.Count())
+		{
+			#Dim parameters 	As %String	= ""
+			Do request.GetParameters(.parameters)
+			//
+			Set statusCode = ..Adapter.ExecuteUpdateParmArray(.rowsAfecteds, request.Statement, .parameters)
+		}
+		Else
+		{
+			Set statusCode = ..Adapter.ExecuteUpdate(.rowsAfecteds, request.Statement)
+		}
+		If ($System.Status.IsError(statusCode))
+	  {
+			Return statusCode
+	  }
+	  Set response.RowsAfecteds	= rowsAfecteds
+	} 
+	Catch (exception)
+	{
+	  Set statusCode	= exception.AsStatus()
+	}
+	Return statusCode
+]]></Implementation>
+</Method>
+
+<Method name="CheckConnection">
+<Description>
+Checa se vieram dados de conexão na mensagem, e se afirmativo configura o adpater para utilizá-los.</Description>
+<FormalSpec>request:cjs.interopway.xdbc.bo.BaseRequest</FormalSpec>
+<Private>1</Private>
+<Implementation><![CDATA[
+	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim exception  As %Exception.General	= ""    
+	Try
+	{
+	  If (request.Credential '= "")
+	  {
+	  	Set statusCode = ..Adapter.CredentialsSet(request.Credential)
+      If ($System.Status.IsError(statusCode))
+      {
+				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
+      }
+	  }
+	  If (request.DSN '= "")
+	  {		
+	  	Set statusCode = ..Adapter.DSNSet(request.DSN)
+	    If ($System.Status.IsError(statusCode))
+	    {
+				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
+	    }
+	  }
+	  Set statusCode = ..Adapter.Connect()
+		If ($System.Status.IsError(statusCode))
+		{
+			Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
+		}
+	}
+	Catch (exception)
+	{
+	    Throw exception
+	}
+]]></Implementation>
+</Method>
+
+<XData name="MessageMap">
+<Data><![CDATA[
+<MapItems>
+    <MapItem MessageType="cjs.interopway.xdbc.bo.UpdateRequest">
+		<Method>ExecuteUpdate</Method>
+	</MapItem>
+    <MapItem MessageType="cjs.interopway.xdbc.bo.ProcedureRequest">
+		<Method>ExecuteProcedure</Method>
+	</MapItem>
+	<MapItem MessageType="cjs.interopway.xdbc.bo.QueryStreamRequest">
+		<Method>ExecuteQueryStream</Method>
+	</MapItem>
+	<MapItem MessageType="cjs.interopway.xdbc.bo.QueryRequest">
+		<Method>ExecuteQuery</Method>
+	</MapItem>
+</MapItems>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.ParameterDefinition">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-26 - Cristiano José da Silva</b><br/>
+This class is used to describe parameters to be used in queries or procedures/functions
+</p>]]></Description>
+<IncludeCode>Ensemble</IncludeCode>
+<Super>%SerialObject,%XML.Adaptor</Super>
+<TimeChanged>66455,61686.9665208</TimeChanged>
+<TimeCreated>66454,47578.807963</TimeCreated>
+
+<Parameter name="INPUT">
+<Expression>##Class(EnsLib.SQL.OutboundAdapter).%GetParameter("SQLParamInput")</Expression>
+</Parameter>
+
+<Parameter name="OUTPUT">
+<Expression>##Class(EnsLib.SQL.OutboundAdapter).%GetParameter("SQLParamOutput")</Expression>
+</Parameter>
+
+<Parameter name="INOUT">
+<Expression>##Class(EnsLib.SQL.OutboundAdapter).%GetParameter("SQLParamInputOutput")</Expression>
+</Parameter>
+
+<Property name="Value">
+<Description>
+Parameter Value</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN"/>
+</Property>
+
+<Property name="IOType">
+<Description>
+IO type of parameter used only to call procedures/functions</Description>
+<Type>%String</Type>
+<Parameter name="DISPLAYLIST" value=",INPUT,OUTPUT,INOUT"/>
+<Parameter name="VALUELIST" value=",1,4,2"/>
+</Property>
+
+<Property name="Ordinal">
+<Description>
+Postion of parameter in the query or procedure/function</Description>
+<Type>%Integer</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="SqlType">
+<Description>
+SQL data type of parameter see EnsSQLTypes.inc</Description>
+<Type>%Integer</Type>
+</Property>
+
+<Property name="Precision">
+<Description>
+Precision of parameter.</Description>
+<Type>%Integer</Type>
+</Property>
+
+<Property name="Scale">
+<Description>
+Scale of parameter</Description>
+<Type>%Integer</Type>
+</Property>
+
+<Property name="LOB">
+<Description>
+Flag to sinalize that the parameter is a large object</Description>
+<Type>%Boolean</Type>
+</Property>
+
+<Property name="Bin">
+<Description>
+Flag to sinalize that the parameter is binary</Description>
+<Type>%Boolean</Type>
+</Property>
+
+<Method name="GetDefinition">
+<Description>
+Create a memory array with parameter description and the io specifaction of parameter</Description>
+<FormalSpec>*array,*io:%String</FormalSpec>
+<Implementation><![CDATA[
+	If (..Value '= "")
+	{
+		Set array(..Ordinal) = ..Value
+	}
+	If (..IOType '= "")
+	{
+		Set array(..Ordinal, "IOType")	= ..IOType
+	}
+	If (..SqlType '= "")
+	{
+		Set array(..Ordinal, "SqlType")	= ..SqlType
+	}
+	If (..Precision '= "")
+	{
+		Set array(..Ordinal, "Prec")	= ..Precision
+	}
+	If (..Scale '= "")
+	{
+		Set array(..Ordinal, "Scale")	= ..Scale
+	}
+	If (..LOB '= "")
+	{
+		Set array(..Ordinal, "LOB")	= ..LOB
+	}
+	If (..Bin '= "")
+	{
+		Set array(..Ordinal, "Bin")	= ..Bin
+	}
+	Set io	= $Get(io) _ $Case(..IOType, ..#INPUT : "i", ..#OUTPUT : "o", ..#INOUT : "b", : "") _ "#"
+]]></Implementation>
+</Method>
+
+<Method name="%OnNew">
+<Description>
+Create a new isntance</Description>
+<FormalSpec>ordinal:%Integer,value:%String="",ioType:%String="",sqlType:%Integer="",precision:%Integer="",scale:%Integer="",lob:%Boolean="",bin:%Boolean=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Set ..Ordinal = ordinal
+	If (value '= "") 
+	{
+		Set ..Value = value
+	}
+	If (sqlType '= "")
+	{
+		Set ..SqlType	= sqlType
+	}
+	If (ioType '= "")
+	{
+		Set ..IOType	= ..IOTypeDisplayToLogical($ZConvert(ioType, "U"))
+	}
+	If (precision '= "")
+	{
+		Set ..Precision	= precision
+	}
+	If (scale '= "")
+	{
+		Set ..Scale	= scale
+	}
+	If (lob '= "")
+	{	
+		Set ..LOB	= lob
+	}
+	If (bin '= "")
+	{
+		Set ..Bin	= bin
+	}
+	Return $System.Status.OK()
+]]></Implementation>
+</Method>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.ProcedureRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-10 - Cristiano José da Silva</b><br/>
+Request para execuão se Procedures nas bases externas
+</p>]]></Description>
+<Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
+<TimeChanged>66454,55218.774529</TimeChanged>
+<TimeCreated>66454,47578.294227</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Default>cjs.interopway.xdbc.bo.ProcedureResponse</Default>
+</Parameter>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.ProcedureResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-10 - Cristiano José da Silva</b><br/>
+Response for Procedures/Funcions statements
+</p>]]></Description>
+<Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
+<TimeChanged>66454,54739.274569</TimeChanged>
+<TimeCreated>66454,47578.845891</TimeCreated>
+
+<Property name="Outputs">
+<Description>
+List of all output parameters of procedure/function</Description>
+<Type>%String</Type>
+<Collection>list</Collection>
+</Property>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.QueryRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-10 - Cristiano José da Silva</b><br/>
+Request for SELECT Statments.
+</p>]]></Description>
+<Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
+<TimeChanged>66454,68137.07568</TimeChanged>
+<TimeCreated>66454,47578.334403</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Type>STRING</Type>
+<Default>cjs.interopway.xdbc.bo.QueryResponse</Default>
+</Parameter>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.QueryResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-10 - Cristiano José da Silva</b><br/>
+Response for SELECT Statments.
+
+</p>]]></Description>
+<Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
+<TimeChanged>66454,55435.634982</TimeChanged>
+<TimeCreated>66454,47578.272299</TimeCreated>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.QueryStreamRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-11-13 - Cristiano José da Silva</b><br/>
+Request for SELECT Statments with CLOB/BLOB columns]]></Description>
+<Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
+<TimeChanged>66454,58544.818803</TimeChanged>
+<TimeCreated>66454,47578.283117</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Default>cjs.interopway.xdbc.bo.QueryStreamResponse</Default>
+</Parameter>
+
+<Property name="ColumnNumbers">
+<Description>
+List of column number where is the CLOB/BLOB data</Description>
+<Type>%Integer</Type>
+<Collection>list</Collection>
+</Property>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.QueryStreamResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-10 - Cristiano José da Silva</b><br/>
+Response for SELECT Statments with CLOB/BLOB columns
+</p>]]></Description>
+<Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
+<TimeChanged>66455,54467.4554184</TimeChanged>
+<TimeCreated>66454,47577.855819</TimeCreated>
+
+<Property name="CharacterStreams">
+<Description>
+List of character streams by query.</Description>
+<Type>%Stream.GlobalCharacter</Type>
+<Collection>list</Collection>
+</Property>
+
+<Property name="BinaryStreams">
+<Description>
+List of binary streams by query.</Description>
+<Type>%Stream.GlobalBinary</Type>
+<Collection>list</Collection>
+</Property>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.UpdateRequest">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-30 - Cristiano José da Silva</b><br/>
+Request for UPDATE/DELETE statements.
+</p>]]></Description>
+<Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
+<TimeChanged>66454,55388.148988</TimeChanged>
+<TimeCreated>66454,47578.282642</TimeCreated>
+
+<Parameter name="RESPONSECLASSNAME">
+<Default>cjs.interopway.xdbc.bo.UpdateResponse</Default>
+</Parameter>
+
+
+</Class>
+
+
+<Class name="cjs.interopway.xdbc.bo.UpdateResponse">
+<Description><![CDATA[
+/// <p style='text-align: justify;'>
+<b>2020-06-30 - Cristiano José da Silva</b><br/>
+Response for UPDATE/DELETE statements.
+</p>]]></Description>
+<Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
+<TimeChanged>66454,55787.728381</TimeChanged>
+<TimeCreated>66454,47578.852602</TimeCreated>
+
+<Property name="RowsAfecteds">
+<Description>
+Number of lines afecteds by the INSERT/UPDATE/DELETE</Description>
+<Type>%Integer</Type>
+</Property>
+
+
+</Class>
+
+
+<Document name="TESTS_XDBC_CONFIG.LUT">
+<lookupTable>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.company.bo.UpdateCompanyRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"UPDATE Sample.Company SET TaxID = ? WHERE ID = ?"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.person.bo.PersonSetsRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"? = CALL Sample.PersonSets(?,?)"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryRequest">{
+	"credential":"ENSEMBLE Samples",
+	"statement":"SELECT * FROM Sample.Person"
+}
+</entry>
+<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryStreamRequest">{
+	"credential":"ENSEMBLE Samples",	
+	"statement":"SELECT * FROM Sample.Employee"
+}
+</entry>
+</lookupTable>
+</Document></Export>
