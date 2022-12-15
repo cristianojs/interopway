@@ -240,3 +240,20 @@ Abaixo é detalhado [cjs.interopway.tests](/src/cjs/interopway/tests):
    - *TestExecuteProcedureODBC* - Executa o comando SQL *? = CALL Sample.PersonSets(?,?)* na conexão JDBC com parâmetros e descrevendo-os.
 
    - *TestExecuteProcedureODBC* - Executa o comando SQL *? = CALL Sample.PersonSets(?,?)* na conexão JDBC com parâmetros e descrevendo-os.
+
+
+## Guia Básico de Uso
+
+Para a utilização do interopway_xdbc basta seguir o simples quia abaixo:
+
+- Adicione o Busines Operation [(cjs.interopway.xdbc.bo.Operation](/src/cjs/interopway/xdbc/bo/Operation.cls) à Production;
+
+- No uso de conexão via **ODBC** configurar o *DSN* no Sistema Operacional;
+
+- No uso de conexão via **JDBC** adicionar o caminho do driver no *CLASSPATH*;
+
+- De acordo com a necessidade pode-se configurar a *Credencial* e/ou *DSN* nas configurações do Business Operation. 
+
+- Caso a *Credencial* e/ou o *DSN* não sejam cofigurados no Business Operation, essas configurações devem ser passadas para o Business Operation através das mensagems de request, podendo ser atribuidas diretamenta na mensagem,ou podem ser adicionadas na *Lookup Table* utilizada no construtor das mensagems. Veja: [cjs.interopway.xdbc.bo.BaseRequest](/src/cjs/interopway/xdbc/bo/BaseRequest.cls)
+
+- Para grande maioria dos bancos de dados os comandos SQL que possuem parâmetros, não é necessário fazer a descrição dos mesmos através das propriedades *SQLType*, *Precision* e *Scale* da classe [cjs.interopway.xdbc.bo.ParameterDefinition](/src/cjs/interopway/xdbc/bo/ParameterDefinition.cls). Veja: [cjs.interopway.samples.company.bo.UpdateCompanyRequest](/src/cjs/interopway/samples/company/bo/UpdateCompanyRequest.cls);
