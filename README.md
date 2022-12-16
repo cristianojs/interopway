@@ -253,6 +253,6 @@ To use interopway_xdbc, just follow the simple guide below:
 
 - According to the need, you can configure the *Credential* and/or *DSN* in the Business Operation settings.
 
-- If the *Credential* and/or *DSN* are not configured in the Business Operation, these settings must be passed to the Business Operation through the request messages, and can be assigned directly to the message, or can be added to the *Lookup Table* used in the message constructo. See: [cjs.interopway.xdbc.bo.BaseRequest](/src/cjs/interopway/xdbc/bo/BaseRequest.cls)
+- If the *Credential* and/or *DSN* are not configured in the Business Operation, these settings must be passed to the Business Operation through the request messages, and can be assigned directly to the message, or can be added to the *Lookup Table* used in the message constructor. See: [cjs.interopway.xdbc.bo.BaseRequest](/src/cjs/interopway/xdbc/bo/BaseRequest.cls)
 
-- For the vast majority of databases, SQL commands that have parameters, it is not necessary to describe them through the properties *SQLType*, *Precision* and *Scale* of the class [cjs.interopway.xdbc.bo.ParameterDefinition] (/src/cjs/interopway/xdbc/bo/ParameterDefinition.cls). See: [cjs.interopway.samples.company.bo.UpdateCompanyRequest](/src/cjs/interopway/samples/company/bo/UpdateCompanyRequest.cls);
+- For the vast majority of databases, SQL commands that have parameters, it is not necessary to describe them through the properties *SQLType*, *Precision* and *Scale* of the class [cjs.interopway.xdbc.bo.ParameterDefinition](/src/cjs/interopway/xdbc/bo/ParameterDefinition.cls). See: [cjs.interopway.samples.company.bo.UpdateCompanyRequest](/src/cjs/interopway/samples/company/bo/UpdateCompanyRequest.cls);
