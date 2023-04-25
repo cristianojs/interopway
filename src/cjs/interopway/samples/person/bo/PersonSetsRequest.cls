@@ -36,7 +36,7 @@ ClassMethod GetInstance(name As %Integer, state As %String) As PersonSetsRequest
 
 Storage Default
 {
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

@@ -20,7 +20,7 @@ Storage Default
 <IdLocation>^cjs.interopw60ED.QueryResponseD</IdLocation>
 <IndexLocation>^cjs.interopw60ED.QueryResponseI</IndexLocation>
 <StreamLocation>^cjs.interopw60ED.QueryResponseS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

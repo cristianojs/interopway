@@ -30,7 +30,7 @@ Storage Default
 <IdLocation>^cjs.interopwa60ED.BaseResponseD</IdLocation>
 <IndexLocation>^cjs.interopwa60ED.BaseResponseI</IndexLocation>
 <StreamLocation>^cjs.interopwa60ED.BaseResponseS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

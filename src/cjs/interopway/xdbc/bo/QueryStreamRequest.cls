@@ -19,7 +19,7 @@ Storage Default
 </Value>
 </Data>
 <DefaultData>QueryStreamRequestDefaultData</DefaultData>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

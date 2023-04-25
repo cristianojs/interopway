@@ -139,7 +139,7 @@ Storage Default
 </Data>
 <State>ParameterDefinitionState</State>
 <StreamLocation>^cjs.intero60ED.ParameterDeC43FS</StreamLocation>
-<Type>%Library.CacheSerialState</Type>
+<Type>%Storage.Serial</Type>
 }
 
 }

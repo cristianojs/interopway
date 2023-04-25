@@ -7,7 +7,7 @@ Class cjs.interopway.samples.person.bo.PersonSetsResponse Extends cjs.interopway
 
 Storage Default
 {
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

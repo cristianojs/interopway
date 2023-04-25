@@ -116,7 +116,7 @@ Storage Default
 <IdLocation>^cjs.interopway60ED.BaseRequestD</IdLocation>
 <IndexLocation>^cjs.interopway60ED.BaseRequestI</IndexLocation>
 <StreamLocation>^cjs.interopway60ED.BaseRequestS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

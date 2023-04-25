@@ -32,7 +32,7 @@ Storage Default
 <IdLocation>^cjs.intero60ED.QueryStream8CB5D</IdLocation>
 <IndexLocation>^cjs.intero60ED.QueryStream8CB5I</IndexLocation>
 <StreamLocation>^cjs.intero60ED.QueryStream8CB5S</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

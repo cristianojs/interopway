@@ -7,7 +7,7 @@ Class cjs.interopway.samples.company.bo.UpdateCompanyResponse Extends cjs.intero
 
 Storage Default
 {
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

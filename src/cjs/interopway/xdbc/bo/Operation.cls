@@ -19,19 +19,19 @@ Property MaxRowsToGet As %Integer [ InitialExpression = 10000 ];
 /// Executes SELECT and returns a instance of <class>EnsLib.SQL.Snapshot</class>
 Method ExecuteQuery(request As cjs.interopway.xdbc.bo.QueryRequest, Output response As cjs.interopway.xdbc.bo.QueryResponse) As %Status
 {
-	#Dim statusCode As %Status						= $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  Set statusCode = request.NewResponse(.response)
-	  If ($System.Status.IsError(statusCode))
-	  {
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Do ..CheckConnection(request)
-	  //
-	  #Dim rs 				As EnsLib.SQL.GatewayResultSet  = ""
-	  #Dim parameters	As %String											= ""
+		}
+		Do ..CheckConnection(request)
+		//
+		#Dim rs			As EnsLib.SQL.GatewayResultSet  = ""
+		#Dim parameters	As %String											= ""
 		If (request.Parameters.Count())
 		{
 			Do request.GetParameters(.parameters)
@@ -42,19 +42,19 @@ Method ExecuteQuery(request As cjs.interopway.xdbc.bo.QueryRequest, Output respo
 		{
 			Set statusCode = ..Adapter.ExecuteQuery(.rs, request.Statement)
 		}
-	  If ($System.Status.IsError(statusCode))
-	  {               
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  #Dim snapshot As EnsLib.SQL.Snapshot = ##Class(EnsLib.SQL.Snapshot).%New()
-	  //
-	  Set snapshot.MaxRowsToGet	= ..MaxRowsToGet
-	  Set statusCode            = rs.GetSnapshot(.snapshot, 1)
-	  If ($System.Status.IsError(statusCode))
-	  {               
+		}
+		#Dim snapshot As EnsLib.SQL.Snapshot = ##Class(EnsLib.SQL.Snapshot).%New()
+		//
+		Set snapshot.MaxRowsToGet	= ..MaxRowsToGet
+		Set statusCode				= rs.GetSnapshot(.snapshot, 1)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Do response.Snapshots.Insert(snapshot)
+		}
+		Do response.Snapshots.Insert(snapshot)
 	}
 	Catch (exception)
 	{
@@ -66,18 +66,18 @@ Method ExecuteQuery(request As cjs.interopway.xdbc.bo.QueryRequest, Output respo
 /// Executes a SELECT that returns a stream data (CLOB or BLOB)
 Method ExecuteQueryStream(request As cjs.interopway.xdbc.bo.QueryStreamRequest, Output response As cjs.interopway.xdbc.bo.QueryStreamResponse) As %Status
 {
-	#Dim statusCode As %Status            = $System.Status.OK()
-	#Dim exception  As %Exception.General	= ""    
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
+	#Dim exception  As %Exception.General	= ""
 	Try
 	{
-	  Set statusCode = ..ExecuteQuery(request, .response)
-	  If ($System.Status.IsError(statusCode))
+		Set statusCode = ..ExecuteQuery(request, .response)
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Return statusCode
 		}
 		#Dim rs As EnsLib.SQL.GatewayResultSet = response.Snapshots.GetAt(1)
-	  If (rs.Next())
-	  {
+		If (rs.Next())
+		{
 			#Dim columnIndex	As %Integer = 0
 			For columnIndex = 1 : 1 : request.ColumnNumbers.Size
 			{
@@ -87,17 +87,17 @@ Method ExecuteQueryStream(request As cjs.interopway.xdbc.bo.QueryStreamRequest, 
 					Set stream = ##Class(%Stream.GlobalBinary).%New()
 					//
 					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
-	  			Do response.BinaryStreams.Insert(stream)
+				Do response.BinaryStreams.Insert(stream)
 				}
 				Else
 				{
 					Set stream = ##Class(%Stream.GlobalCharacter).%New()
 					//
 					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
-	  			Do response.CharacterStreams.Insert(stream)
+					Do response.CharacterStreams.Insert(stream)
 				}				
 			}
-	  }
+		}
 	} 
 	Catch (exception)
 	{
@@ -109,12 +109,12 @@ Method ExecuteQueryStream(request As cjs.interopway.xdbc.bo.QueryStreamRequest, 
 /// Executa Procedures ou Functions
 Method ExecuteProcedure(request As cjs.interopway.xdbc.bo.ProcedureRequest, Output response As cjs.interopway.xdbc.bo.ProcedureResponse) As %Status
 {
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  Set statusCode = request.NewResponse(.response)
-		If ($System.Status.IsError(statusCode))
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Return statusCode
 		}
@@ -122,11 +122,12 @@ Method ExecuteProcedure(request As cjs.interopway.xdbc.bo.ProcedureRequest, Outp
 		If (request.Parameters.Count())
 		{
 			#Dim parameters	As %String	= ""
-			#Dim io					As %String	= ""
+			#Dim io			As %String	= ""
+			//
 			Do request.GetParameters(.parameters, .io)
 			//
-			#Dim snapshots	As %ListOfObjects		= ""
-			#Dim outputs		As %ListOfDataTypes	= ""
+			#Dim snapshots	As %ListOfObjects	= ""
+			#Dim outputs	As %ListOfDataTypes	= ""
 			//
 			Set statusCode = ..Adapter.ExecuteProcedureParmArray(.snapshots, .outputs, request.Statement, io, .parameters)
 		}
@@ -134,12 +135,12 @@ Method ExecuteProcedure(request As cjs.interopway.xdbc.bo.ProcedureRequest, Outp
 		{
 			Set statusCode = ..Adapter.ExecuteProcedure(.snapshots, .outputs, request.Statement)
 		}
-		If ($System.Status.IsError(statusCode))
-	  {
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Set response.Snapshots	= snapshots
-	  Set response.Outputs		= outputs
+		}
+		Set response.Snapshots	= snapshots
+		Set response.Outputs	= outputs
 	} 
 	Catch (exception)
 	{
@@ -151,18 +152,18 @@ Method ExecuteProcedure(request As cjs.interopway.xdbc.bo.ProcedureRequest, Outp
 /// Executes INSERT/UPDATE/DELETE
 Method ExecuteUpdate(request As cjs.interopway.xdbc.bo.UpdateRequest, Output response As cjs.interopway.xdbc.bo.UpdateResponse) As %Status
 {
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{	    
-	  Set statusCode = request.NewResponse(.response)
-	  If ($System.Status.IsError(statusCode))
-	  {
-			Return statusCode
-	  }
-	  Do ..CheckConnection(request)
-	  //
-	  #Dim rowsAfecteds	As %ListOfDataTypes	= ""
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
+		Return statusCode
+		}
+		Do ..CheckConnection(request)
+		//
+		#Dim rowsAfecteds	As %ListOfDataTypes	= ""
 		If (request.Parameters.Count())
 		{
 			#Dim parameters 	As %String	= ""
@@ -174,15 +175,15 @@ Method ExecuteUpdate(request As cjs.interopway.xdbc.bo.UpdateRequest, Output res
 		{
 			Set statusCode = ..Adapter.ExecuteUpdate(.rowsAfecteds, request.Statement)
 		}
-		If ($System.Status.IsError(statusCode))
-	  {
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Set response.RowsAfecteds	= rowsAfecteds
+		}
+		Set response.RowsAfecteds	= rowsAfecteds
 	} 
 	Catch (exception)
 	{
-	  Set statusCode	= exception.AsStatus()
+	  Set statusCode = exception.AsStatus()
 	}
 	Return statusCode
 }
@@ -190,35 +191,35 @@ Method ExecuteUpdate(request As cjs.interopway.xdbc.bo.UpdateRequest, Output res
 /// Checa se vieram dados de conexão na mensagem, e se afirmativo configura o adpater para utilizá-los.
 Method CheckConnection(request As cjs.interopway.xdbc.bo.BaseRequest) [ Private ]
 {
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  If (request.Credential '= "")
-	  {
-	  	Set statusCode = ..Adapter.CredentialsSet(request.Credential)
-      If ($System.Status.IsError(statusCode))
-      {
+		If (request.Credential '= "")
+		{
+			Set statusCode = ..Adapter.CredentialsSet(request.Credential)
+			If ($SYSTEM.Status.IsError(statusCode))
+			{
 				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
-      }
-	  }
-	  If (request.DSN '= "")
-	  {		
-	  	Set statusCode = ..Adapter.DSNSet(request.DSN)
-	    If ($System.Status.IsError(statusCode))
-	    {
+			}
+		}
+		If (request.DSN '= "")
+		{		
+			Set statusCode = ..Adapter.DSNSet(request.DSN)
+			If ($SYSTEM.Status.IsError(statusCode))
+			{
 				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
-	    }
-	  }
-	  Set statusCode = ..Adapter.Connect()
-		If ($System.Status.IsError(statusCode))
+			}
+		}
+		Set statusCode = ..Adapter.Connect()
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
 		}
 	}
 	Catch (exception)
 	{
-	    Throw exception
+		Throw exception
 	}
 }
 

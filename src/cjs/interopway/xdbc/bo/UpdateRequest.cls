@@ -9,7 +9,7 @@ Parameter RESPONSECLASSNAME = "cjs.interopway.xdbc.bo.UpdateResponse";
 
 Storage Default
 {
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

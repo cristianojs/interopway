@@ -26,7 +26,7 @@ Storage Default
 <IdLocation>^cjs.interop60ED.UpdateResponseD</IdLocation>
 <IndexLocation>^cjs.interop60ED.UpdateResponseI</IndexLocation>
 <StreamLocation>^cjs.interop60ED.UpdateResponseS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

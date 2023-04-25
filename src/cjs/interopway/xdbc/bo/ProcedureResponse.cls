@@ -26,7 +26,7 @@ Storage Default
 <IdLocation>^cjs.intero60ED.ProcedureRe76C5D</IdLocation>
 <IndexLocation>^cjs.intero60ED.ProcedureRe76C5I</IndexLocation>
 <StreamLocation>^cjs.intero60ED.ProcedureRe76C5S</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }

@@ -22,7 +22,7 @@ ClassMethod GetInstance(companyId As %Integer, taxId As %String) As UpdateCompan
 
 Storage Default
 {
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
