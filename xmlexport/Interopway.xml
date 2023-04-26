@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2018.1.5 (Build 659U)" ts="2022-12-13 10:12:08">
-<Project name="Interopway_XDBC" LastModified="2022-12-11 19:18:06.704663">
+<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2023.1 (Build 229U)" ts="2023-04-26 09:40:39">
+<Project name="Interopway" LastModified="2023-04-26 09:40:39.0226815" Target="Test^Test" TargetType="2">
   <Items>
-    <ProjectItem name="TESTS_XDBC_CONFIG.LUT" type="LUT"></ProjectItem>
     <ProjectItem name="cjs.interopway.samples.InteropProducion" type="CLS"></ProjectItem>
     <ProjectItem name="cjs.interopway.samples.company.bo.UpdateCompanyRequest" type="CLS"></ProjectItem>
     <ProjectItem name="cjs.interopway.samples.company.bo.UpdateCompanyResponse" type="CLS"></ProjectItem>
@@ -27,14 +26,14 @@
 
 <Class name="cjs.interopway.samples.InteropProducion">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2022-12-11 - Cristiano José da Silva</b><br/>
-Production that show how to use the XDBC classes to with few line of code e and 
-configurations, to achieve a database interoperability.
+<p >
+  <b>2022-12-11 - Cristiano José da Silva</b><br/>
+  Production that show how to use the XDBC classes with few line of code e and 
+  configurations, to achieve interoperability with external databases.
 </p>]]></Description>
 <Super>Ens.Production</Super>
-<TimeChanged>66455,55866.3247339</TimeChanged>
-<TimeCreated>66454,60827.585081</TimeCreated>
+<TimeChanged>66585,36626.9280604</TimeChanged>
+<TimeCreated>66585,36626.9280604</TimeCreated>
 
 <XData name="ProductionDefinition">
 <Data><![CDATA[
@@ -44,12 +43,14 @@ configurations, to achieve a database interoperability.
   <Item Name="ODBC Sample Operation" Category="" ClassName="cjs.interopway.xdbc.bo.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DSN">ENSEMBLE Samples</Setting>
     <Setting Target="Adapter" Name="StayConnected">0</Setting>
+    <Setting Target="Adapter" Name="Credentials">ENSEMBLE Samples</Setting>
   </Item>
   <Item Name="JDBC Sample Operation" Category="" ClassName="cjs.interopway.xdbc.bo.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DSN">jdbc:Cache://127.0.0.1:56773/SAMPLES</Setting>
     <Setting Target="Adapter" Name="JDBCDriver">com.intersys.jdbc.CacheDriver</Setting>
     <Setting Target="Adapter" Name="JGService">EnsLib.JavaGateway.Service</Setting>
     <Setting Target="Adapter" Name="StayConnected">0</Setting>
+    <Setting Target="Adapter" Name="Credentials">ENSEMBLE Samples</Setting>
   </Item>
   <Item Name="EnsLib.JavaGateway.Service" Category="" ClassName="EnsLib.JavaGateway.Service" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="ClassPath">C:\InterSystems\Ensemble\dev\java\lib\JDK18\cache-db-2.0.0.jar;C:\InterSystems\Ensemble\dev\java\lib\JDK18\cache-jdbc-2.0.0.jar</Setting>
@@ -62,14 +63,14 @@ configurations, to achieve a database interoperability.
 
 <Class name="cjs.interopway.samples.company.bo.UpdateCompanyRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 	<b>2022-12-11 - Cristiano José da Silva</b><br/>
 	Request to update a record from the table Sample.Company
 </p>]]></Description>
 <Import>cjs.interopway.xdbc.bo</Import>
 <Super>UpdateRequest</Super>
-<TimeChanged>66455,57944.0504522</TimeChanged>
-<TimeCreated>66454,67957.771152</TimeCreated>
+<TimeChanged>66585,36626.5015506</TimeChanged>
+<TimeCreated>66585,36626.5015506</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Type>STRING</Type>
@@ -92,34 +93,39 @@ Create a new Instance of <class>cjs.interopway.samples.person.bo.UpdateCompanyRe
 ]]></Implementation>
 </Method>
 
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.samples.company.bo.UpdateCompanyResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2022-12-11 - Cristiano José da Silva</b><br/>
-Response from updated record from the table Sample.Company
+<p style='text-align: justify;'>
+	<b>2022-12-11 - Cristiano José da Silva</b><br/>
+	Response from updated record from the table Sample.Company
 </p>]]></Description>
 <Super>cjs.interopway.xdbc.bo.UpdateResponse</Super>
-<TimeChanged>66455,33833.3056749</TimeChanged>
-<TimeCreated>66454,67957.771152</TimeCreated>
+<TimeChanged>66585,36626.512005</TimeChanged>
+<TimeCreated>66585,36626.512005</TimeCreated>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.samples.person.bo.PersonSetsRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 	<b>2022-12-11 - Cristiano José da Silva</b><br/>
 	Request to call the stored procedure ? = CALL Sample.PersonSets('?','?')
 </p>]]></Description>
 <Import>cjs.interopway.xdbc.bo</Import>
 <IncludeCode>EnsSQLTypes</IncludeCode>
 <Super>ProcedureRequest</Super>
-<TimeChanged>66455,61938.1092953</TimeChanged>
-<TimeCreated>66454,67957.771152</TimeCreated>
+<TimeChanged>66585,36626.5032174</TimeChanged>
+<TimeCreated>66585,36626.5032174</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Type>STRING</Type>
@@ -154,36 +160,40 @@ Set, describe parameters and return.]]></Description>
 ]]></Implementation>
 </Method>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.samples.person.bo.PersonSetsResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2022-12-11 - Cristiano José da Silva</b><br/>
-Response from call of the stored procedure Sample.PersonSets
+<p style='text-align: justify;'>
+	<b>2022-12-11 - Cristiano José da Silva</b><br/>
+	Response from call of the stored procedure Sample.PersonSets
 </p>]]></Description>
 <Super>cjs.interopway.xdbc.bo.ProcedureResponse</Super>
-<TimeChanged>66455,39934.1220295</TimeChanged>
-<TimeCreated>66454,67957.771152</TimeCreated>
+<TimeChanged>66585,36626.8826519</TimeChanged>
+<TimeCreated>66585,36626.8826519</TimeCreated>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.tests.InteropProduction">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2022-12-11 - Cristiano José da Silva</b><br/>
-Tests set for Business Opeation class: <class>Operation</class><br/><br/>
-
-The tests are executed aganist a Ensemble ODBC/JDBC conection in namespace SAMPLES.
+<p style='text-align: justify;'>
+	<b>2022-12-11 - Cristiano José da Silva</b><br/>
+	Tests set for Business Opeation class: <class>Operation</class>
+	<br/><br/>
+	The tests are executed aganist a Ensemble ODBC/JDBC conection in namespace SAMPLES.
 </p>]]></Description>
 <Import>cjs.interopway.xdbc.bo,cjs.interopway.samples.person.bo,cjs.interopway.samples.company.bo</Import>
 <Super>%UnitTest.TestProduction</Super>
-<TimeChanged>66455,62153.8391494</TimeChanged>
-<TimeCreated>66454,67184.049005</TimeCreated>
+<TimeChanged>66585,36626.9309013</TimeChanged>
+<TimeCreated>66585,36626.9309013</TimeCreated>
 
 <Parameter name="PRODUCTION">
 <Description>
@@ -342,7 +352,7 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 	<example>
 		SELECT * FROM Sample.Person
 	<example>
-/// <p style='text-align: justify;'>]]></Description>
+<p style='text-align: justify;'>]]></Description>
 <FormalSpec>targetBusinessOperation:%String</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
@@ -380,7 +390,7 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 	<example>
 		SELECT * FROM Sample.Employee
 	<example>
-/// <p style='text-align: justify;'>]]></Description>
+<p style='text-align: justify;'>]]></Description>
 <FormalSpec>targetBusinessOperation:%String</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
@@ -423,7 +433,7 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 	<example>
 		UPDATE Sample.Person SET TaxID = '?' WHERE ID = ?
 	<example>
-/// <p style='text-align: justify;'>]]></Description>
+<p style='text-align: justify;'>]]></Description>
 <FormalSpec>targetBusinessOperation:%String,updateRequest:UpdateCompanyRequest</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
@@ -449,7 +459,7 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 
 <Method name="ExecuteProcedure">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 	Test for Business Operation Method <b>ExecuteProcedure</b>. Invoque the Business Operation: <b>ODBC Samples Operation
   </b><br/>
 	This test use the request class: <class>ProcedureRequest</class> and the Lookup Table: <b>TESTS_XDBC_CONFIG</b>
@@ -459,7 +469,7 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 	<example>
 		CALL Sample.PersonSets('A','NY')
 	<example>
-/// <p style='text-align: justify;'>]]></Description>
+<p style='text-align: justify;'>]]></Description>
 <FormalSpec>targetBusinessOperation:%String,procedureRequest:PersonSetsRequest</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
@@ -485,9 +495,11 @@ TestMethod for Business Operation Method ExecuteQueryStream using a JODBC connec
 </Method>
 
 <Method name="IsProductionRunning">
-<Description>
-I do not know why, in test executions, the Production does not start, then 
-I check if Production is running, in case of Production is stopped I start it.</Description>
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	I do not know why, in test executions, the Production does not start, then 
+	I check if Production is running, in case of Production is stopped I start it.
+</p>]]></Description>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
@@ -505,10 +517,10 @@ I check if Production is running, in case of Production is stopped I start it.</
 
 <Class name="cjs.interopway.xdbc.bo.BaseRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 	<b>2020-06-17 - Cristiano José da Silva</b><br/>
-	Base request to the Business Operation <class>cjs.interopway.xdbc.bo.Operation<class/><br/>
-	This class can not be instantiated. Useone of the following subclasses:<br>
+	Base request to the Business Operation <class>cjs.interopway.xdbc.bo.Operation</class><br/>
+	This class can not be instantiated. Use one of the following subclasses:<br>
 	<ul>
 		<li><class>cjs.interopway.xdbc.bo.ProcedureRequest</class> - To execute StroredProcedures/Functions<li>
 		<li><class>cjs.interopway.xdbc.bo.QueryRequest</class> - To execute SELECT statements<li>
@@ -518,8 +530,8 @@ I check if Production is running, in case of Production is stopped I start it.</
 </p>]]></Description>
 <Abstract>1</Abstract>
 <Super>%Persistent,Ens.Request</Super>
-<TimeChanged>66455,57217.413863</TimeChanged>
-<TimeCreated>66454,47577.860617</TimeCreated>
+<TimeChanged>66585,36627.5150103</TimeChanged>
+<TimeCreated>66585,36627.5150103</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Type>STRING</Type>
@@ -557,7 +569,7 @@ List of paramters used in the SQL Statement</Description>
 
 <Method name="GetParameters">
 <Description>
-Create a memory array with parameter description and the io specifaction.</Description>
+Method to retreave a in memory array with parameter description and the io specification.</Description>
 <FormalSpec>*array,*io:%String</FormalSpec>
 <Implementation><![CDATA[
 	#Dim indiexParmaters As %Integer	= 0
@@ -573,15 +585,21 @@ Create a memory array with parameter description and the io specifaction.</Descr
 <Method name="%OnNew">
 <Description><![CDATA[
 /// <p style='text-align: justify;'>
-Return a new instance of the message, look for the settings in the Lookup Table received in the parameter lookupTable. 
-The key of table is the fully qualified name of the request class.
-<pre>
-{
-  dsn:"DSN name of ODBC connection or connection string of JDBC connection", 
-  statement:"SQL statement to be executed", 
-  credential:"Credential name configurated in the SMP"
-}
-</pre>
+	Return a new instance of the message populated with the settings in the Lookup Table received in the parameter lookupTable.
+		<br/>
+	The key of the Lookup Table is the fully qualified name of the request class. Bellow a sample:
+	<pre>
+		&lt;?xml version="1.0"?&gt;
+		&lt;lookupTable&gt;
+			&lt;entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryRequest"&gt;
+				{
+					"credential":"ENSEMBLE Samples",
+					"dsn":"ENSEMBLE Samples",
+					"statement":"SELECT * FROM Sample.Person"
+				}
+			&lt;entry&gt;
+		&lt;/lookupTable&gt;
+	</pre>
 </p>]]></Description>
 <FormalSpec>lookupTable:%String="XDBC"</FormalSpec>
 <ReturnType>%Status</ReturnType>
@@ -621,18 +639,51 @@ The key of table is the fully qualified name of the request class.
 ]]></Implementation>
 </Method>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.interopway60ED.BaseRequestD</DataLocation>
+<DefaultData>BaseRequestDefaultData</DefaultData>
+<IdLocation>^cjs.interopway60ED.BaseRequestD</IdLocation>
+<IndexLocation>^cjs.interopway60ED.BaseRequestI</IndexLocation>
+<StreamLocation>^cjs.interopway60ED.BaseRequestS</StreamLocation>
+<Data name="BaseRequestDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Statement</Value>
+</Value>
+<Value name="3">
+<Value>Credential</Value>
+</Value>
+<Value name="4">
+<Value>DSN</Value>
+</Value>
+<Value name="5">
+<Value>Parameters</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.BaseResponse">
 <Description><![CDATA[
 /// <p style='text-align: justify;'>
-<b>2020-05-11 - Cristiano José da Silva</b><br/>
+	<b>2020-06-17 - Cristiano José da Silva</b><br/>
+	Base response to the Business Operation <class>cjs.interopway.xdbc.bo.Operation</class><br/>
+	This class can not be instantiated. Use one of the following subclasses:<br>
+	<ul>
+		<li><class>cjs.interopway.xdbc.bo.ProcedureResponse</class> - Result of  StroredProcedures/Functions<li>
+		<li><class>cjs.interopway.xdbc.bo.QueryResponse</class> - Result of SELECT statements<li>
+		<li><class>cjs.interopway.xdbc.bo.QueryStreamResponse</class> - Result of SELECT statements that return BLOB/CLOB<li>
+		<li><class>cjs.interopway.xdbc.bo.UpdateResponse</class> - Result of INSERT/UPDATE/DELETE statements<li>
+	</ul>
 </p>]]></Description>
+<Abstract>1</Abstract>
 <Super>%Persistent,Ens.Response</Super>
-<TimeChanged>66456,30852.239446</TimeChanged>
-<TimeCreated>66454,47577.871526</TimeCreated>
+<TimeChanged>66585,36626.4994956</TimeChanged>
+<TimeCreated>66585,36626.4994956</TimeCreated>
 
 <Property name="Snapshots">
 <Description>
@@ -641,19 +692,34 @@ List of snapshots returned by statement execution</Description>
 <Collection>list</Collection>
 </Property>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.interopwa60ED.BaseResponseD</DataLocation>
+<DefaultData>BaseResponseDefaultData</DefaultData>
+<IdLocation>^cjs.interopwa60ED.BaseResponseD</IdLocation>
+<IndexLocation>^cjs.interopwa60ED.BaseResponseI</IndexLocation>
+<StreamLocation>^cjs.interopwa60ED.BaseResponseS</StreamLocation>
+<Data name="BaseResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Snapshots</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.Operation">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 <b>2020-05-11 - Cristiano José da Silva</b><br/>
 Generic Business Operation to use XDBC connections.
 </p>]]></Description>
 <Super>Ens.BusinessOperation</Super>
-<TimeChanged>66456,30683.3598727</TimeChanged>
-<TimeCreated>66454,47578.321506</TimeCreated>
+<TimeChanged>66588,39851.0061196</TimeChanged>
+<TimeCreated>66585,36626.5277616</TimeCreated>
 
 <Parameter name="ADAPTER">
 <Default>EnsLib.SQL.OutboundAdapter</Default>
@@ -684,19 +750,19 @@ Executes SELECT and returns a instance of <class>EnsLib.SQL.Snapshot</class>]]><
 <FormalSpec>request:cjs.interopway.xdbc.bo.QueryRequest,*response:cjs.interopway.xdbc.bo.QueryResponse</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	#Dim statusCode As %Status						= $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  Set statusCode = request.NewResponse(.response)
-	  If ($System.Status.IsError(statusCode))
-	  {
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Do ..CheckConnection(request)
-	  //
-	  #Dim rs 				As EnsLib.SQL.GatewayResultSet  = ""
-	  #Dim parameters	As %String											= ""
+		}
+		Do ..CheckConnection(request)
+		//
+		#Dim rs			As EnsLib.SQL.GatewayResultSet  = ""
+		#Dim parameters	As %String											= ""
 		If (request.Parameters.Count())
 		{
 			Do request.GetParameters(.parameters)
@@ -707,19 +773,19 @@ Executes SELECT and returns a instance of <class>EnsLib.SQL.Snapshot</class>]]><
 		{
 			Set statusCode = ..Adapter.ExecuteQuery(.rs, request.Statement)
 		}
-	  If ($System.Status.IsError(statusCode))
-	  {               
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  #Dim snapshot As EnsLib.SQL.Snapshot = ##Class(EnsLib.SQL.Snapshot).%New()
-	  //
-	  Set snapshot.MaxRowsToGet	= ..MaxRowsToGet
-	  Set statusCode            = rs.GetSnapshot(.snapshot, 1)
-	  If ($System.Status.IsError(statusCode))
-	  {               
+		}
+		#Dim snapshot As EnsLib.SQL.Snapshot = ##Class(EnsLib.SQL.Snapshot).%New()
+		//
+		Set snapshot.MaxRowsToGet	= ..MaxRowsToGet
+		Set statusCode				= rs.GetSnapshot(.snapshot, 1)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Do response.Snapshots.Insert(snapshot)
+		}
+		Do response.Snapshots.Insert(snapshot)
 	}
 	Catch (exception)
 	{
@@ -735,18 +801,18 @@ Executes a SELECT that returns a stream data (CLOB or BLOB)</Description>
 <FormalSpec>request:cjs.interopway.xdbc.bo.QueryStreamRequest,*response:cjs.interopway.xdbc.bo.QueryStreamResponse</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	#Dim statusCode As %Status            = $System.Status.OK()
-	#Dim exception  As %Exception.General	= ""    
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
+	#Dim exception  As %Exception.General	= ""
 	Try
 	{
-	  Set statusCode = ..ExecuteQuery(request, .response)
-	  If ($System.Status.IsError(statusCode))
+		Set statusCode = ..ExecuteQuery(request, .response)
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Return statusCode
 		}
 		#Dim rs As EnsLib.SQL.GatewayResultSet = response.Snapshots.GetAt(1)
-	  If (rs.Next())
-	  {
+		If (rs.Next())
+		{
 			#Dim columnIndex	As %Integer = 0
 			For columnIndex = 1 : 1 : request.ColumnNumbers.Size
 			{
@@ -756,17 +822,17 @@ Executes a SELECT that returns a stream data (CLOB or BLOB)</Description>
 					Set stream = ##Class(%Stream.GlobalBinary).%New()
 					//
 					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
-	  			Do response.BinaryStreams.Insert(stream)
+				Do response.BinaryStreams.Insert(stream)
 				}
 				Else
 				{
 					Set stream = ##Class(%Stream.GlobalCharacter).%New()
 					//
 					Do stream.CopyFrom(rs.GetDataStream(request.ColumnNumbers.GetAt(columnIndex)))
-	  			Do response.CharacterStreams.Insert(stream)
+					Do response.CharacterStreams.Insert(stream)
 				}				
 			}
-	  }
+		}
 	} 
 	Catch (exception)
 	{
@@ -782,12 +848,12 @@ Executa Procedures ou Functions</Description>
 <FormalSpec>request:cjs.interopway.xdbc.bo.ProcedureRequest,*response:cjs.interopway.xdbc.bo.ProcedureResponse</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  Set statusCode = request.NewResponse(.response)
-		If ($System.Status.IsError(statusCode))
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Return statusCode
 		}
@@ -795,11 +861,12 @@ Executa Procedures ou Functions</Description>
 		If (request.Parameters.Count())
 		{
 			#Dim parameters	As %String	= ""
-			#Dim io					As %String	= ""
+			#Dim io			As %String	= ""
+			//
 			Do request.GetParameters(.parameters, .io)
 			//
-			#Dim snapshots	As %ListOfObjects		= ""
-			#Dim outputs		As %ListOfDataTypes	= ""
+			#Dim snapshots	As %ListOfObjects	= ""
+			#Dim outputs	As %ListOfDataTypes	= ""
 			//
 			Set statusCode = ..Adapter.ExecuteProcedureParmArray(.snapshots, .outputs, request.Statement, io, .parameters)
 		}
@@ -807,12 +874,12 @@ Executa Procedures ou Functions</Description>
 		{
 			Set statusCode = ..Adapter.ExecuteProcedure(.snapshots, .outputs, request.Statement)
 		}
-		If ($System.Status.IsError(statusCode))
-	  {
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Set response.Snapshots	= snapshots
-	  Set response.Outputs		= outputs
+		}
+		Set response.Snapshots	= snapshots
+		Set response.Outputs	= outputs
 	} 
 	Catch (exception)
 	{
@@ -828,18 +895,18 @@ Executes INSERT/UPDATE/DELETE</Description>
 <FormalSpec>request:cjs.interopway.xdbc.bo.UpdateRequest,*response:cjs.interopway.xdbc.bo.UpdateResponse</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{	    
-	  Set statusCode = request.NewResponse(.response)
-	  If ($System.Status.IsError(statusCode))
-	  {
-			Return statusCode
-	  }
-	  Do ..CheckConnection(request)
-	  //
-	  #Dim rowsAfecteds	As %ListOfDataTypes	= ""
+		Set statusCode = request.NewResponse(.response)
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
+		Return statusCode
+		}
+		Do ..CheckConnection(request)
+		//
+		#Dim rowsAfecteds	As %ListOfDataTypes	= ""
 		If (request.Parameters.Count())
 		{
 			#Dim parameters 	As %String	= ""
@@ -851,15 +918,15 @@ Executes INSERT/UPDATE/DELETE</Description>
 		{
 			Set statusCode = ..Adapter.ExecuteUpdate(.rowsAfecteds, request.Statement)
 		}
-		If ($System.Status.IsError(statusCode))
-	  {
+		If ($SYSTEM.Status.IsError(statusCode))
+		{
 			Return statusCode
-	  }
-	  Set response.RowsAfecteds	= rowsAfecteds
+		}
+		Set response.RowsAfecteds	= rowsAfecteds
 	} 
 	Catch (exception)
 	{
-	  Set statusCode	= exception.AsStatus()
+	  Set statusCode = exception.AsStatus()
 	}
 	Return statusCode
 ]]></Implementation>
@@ -871,35 +938,35 @@ Checa se vieram dados de conexão na mensagem, e se afirmativo configura o adpat
 <FormalSpec>request:cjs.interopway.xdbc.bo.BaseRequest</FormalSpec>
 <Private>1</Private>
 <Implementation><![CDATA[
-	#Dim statusCode As %Status            = $System.Status.OK()
+	#Dim statusCode As %Status				= $SYSTEM.Status.OK()
 	#Dim exception  As %Exception.General	= ""    
 	Try
 	{
-	  If (request.Credential '= "")
-	  {
-	  	Set statusCode = ..Adapter.CredentialsSet(request.Credential)
-      If ($System.Status.IsError(statusCode))
-      {
+		If (request.Credential '= "")
+		{
+			Set statusCode = ..Adapter.CredentialsSet(request.Credential)
+			If ($SYSTEM.Status.IsError(statusCode))
+			{
 				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
-      }
-	  }
-	  If (request.DSN '= "")
-	  {		
-	  	Set statusCode = ..Adapter.DSNSet(request.DSN)
-	    If ($System.Status.IsError(statusCode))
-	    {
+			}
+		}
+		If (request.DSN '= "")
+		{		
+			Set statusCode = ..Adapter.DSNSet(request.DSN)
+			If ($SYSTEM.Status.IsError(statusCode))
+			{
 				Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
-	    }
-	  }
-	  Set statusCode = ..Adapter.Connect()
-		If ($System.Status.IsError(statusCode))
+			}
+		}
+		Set statusCode = ..Adapter.Connect()
+		If ($SYSTEM.Status.IsError(statusCode))
 		{
 			Throw ##class(%Exception.StatusException).CreateFromStatus(statusCode)
 		}
 	}
 	Catch (exception)
 	{
-	    Throw exception
+		Throw exception
 	}
 ]]></Implementation>
 </Method>
@@ -927,14 +994,14 @@ Checa se vieram dados de conexão na mensagem, e se afirmativo configura o adpat
 
 <Class name="cjs.interopway.xdbc.bo.ParameterDefinition">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-26 - Cristiano José da Silva</b><br/>
-This class is used to describe parameters to be used in queries or procedures/functions
+<p style='text-align: justify;'>
+	<b>2020-06-26 - Cristiano José da Silva</b><br/>
+	This class is used to describe parameters to be used in queries or procedures/functions
 </p>]]></Description>
 <IncludeCode>Ensemble</IncludeCode>
 <Super>%SerialObject,%XML.Adaptor</Super>
-<TimeChanged>66455,61686.9665208</TimeChanged>
-<TimeCreated>66454,47578.807963</TimeCreated>
+<TimeChanged>66585,36627.5156475</TimeChanged>
+<TimeCreated>66585,36627.5156475</TimeCreated>
 
 <Parameter name="INPUT">
 <Expression>##Class(EnsLib.SQL.OutboundAdapter).%GetParameter("SQLParamInput")</Expression>
@@ -1038,8 +1105,11 @@ Create a memory array with parameter description and the io specifaction of para
 </Method>
 
 <Method name="%OnNew">
-<Description>
-Create a new isntance</Description>
+<Description><![CDATA[
+<p style='text-align: justify;'>
+	Create a new isntance of <class>cjs.interopway.xdbc.bo.ParameterDefinition</class> populated with all parameters received.
+	Only the ordinal parameter is required.
+</p>]]></Description>
 <FormalSpec>ordinal:%Integer,value:%String="",ioType:%String="",sqlType:%Integer="",precision:%Integer="",scale:%Integer="",lob:%Boolean="",bin:%Boolean=""</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
@@ -1076,37 +1146,69 @@ Create a new isntance</Description>
 ]]></Implementation>
 </Method>
 
-
+<Storage name="Default">
+<Type>%Storage.Serial</Type>
+<State>ParameterDefinitionState</State>
+<StreamLocation>^cjs.intero60ED.ParameterDeC43FS</StreamLocation>
+<Data name="ParameterDefinitionState">
+<Value name="1">
+<Value>Value</Value>
+</Value>
+<Value name="2">
+<Value>IOType</Value>
+</Value>
+<Value name="3">
+<Value>Ordinal</Value>
+</Value>
+<Value name="4">
+<Value>SqlType</Value>
+</Value>
+<Value name="5">
+<Value>Precision</Value>
+</Value>
+<Value name="6">
+<Value>Scale</Value>
+</Value>
+<Value name="7">
+<Value>LOB</Value>
+</Value>
+<Value name="8">
+<Value>Bin</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.ProcedureRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-10 - Cristiano José da Silva</b><br/>
-Request para execuão se Procedures nas bases externas
+<p style='text-align: justify;'>
+	<b>2020-06-10 - Cristiano José da Silva</b><br/>
+	Request para execuão se Procedures nas bases externas
 </p>]]></Description>
 <Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
-<TimeChanged>66454,55218.774529</TimeChanged>
-<TimeCreated>66454,47578.294227</TimeCreated>
+<TimeChanged>66585,36626.8949549</TimeChanged>
+<TimeCreated>66585,36626.8949549</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Default>cjs.interopway.xdbc.bo.ProcedureResponse</Default>
 </Parameter>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.ProcedureResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-10 - Cristiano José da Silva</b><br/>
-Response for Procedures/Funcions statements
+<p style='text-align: justify;'>
+	<b>2020-06-10 - Cristiano José da Silva</b><br/>
+	Response for Procedures/Funcions statements
 </p>]]></Description>
 <Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
-<TimeChanged>66454,54739.274569</TimeChanged>
-<TimeCreated>66454,47578.845891</TimeCreated>
+<TimeChanged>66585,36626.9016685</TimeChanged>
+<TimeCreated>66585,36626.9016685</TimeCreated>
 
 <Property name="Outputs">
 <Description>
@@ -1115,52 +1217,87 @@ List of all output parameters of procedure/function</Description>
 <Collection>list</Collection>
 </Property>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.intero60ED.ProcedureRe76C5D</DataLocation>
+<DefaultData>ProcedureResponseDefaultData</DefaultData>
+<IdLocation>^cjs.intero60ED.ProcedureRe76C5D</IdLocation>
+<IndexLocation>^cjs.intero60ED.ProcedureRe76C5I</IndexLocation>
+<StreamLocation>^cjs.intero60ED.ProcedureRe76C5S</StreamLocation>
+<Data name="ProcedureResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Outputs</Value>
+</Value>
+<Value name="3">
+<Value>Snapshots</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.QueryRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-10 - Cristiano José da Silva</b><br/>
-Request for SELECT Statments.
+<p style='text-align: justify;'>
+	<b>2020-06-10 - Cristiano José da Silva</b><br/>
+	Request for SELECT Statments.
 </p>]]></Description>
 <Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
-<TimeChanged>66454,68137.07568</TimeChanged>
-<TimeCreated>66454,47578.334403</TimeCreated>
+<TimeChanged>66585,36627.5251729</TimeChanged>
+<TimeCreated>66585,36627.5251729</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Type>STRING</Type>
 <Default>cjs.interopway.xdbc.bo.QueryResponse</Default>
 </Parameter>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.QueryResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
+<p style='text-align: justify;'>
 <b>2020-06-10 - Cristiano José da Silva</b><br/>
 Response for SELECT Statments.
-
 </p>]]></Description>
 <Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
-<TimeChanged>66454,55435.634982</TimeChanged>
-<TimeCreated>66454,47578.272299</TimeCreated>
+<TimeChanged>66585,36627.5301856</TimeChanged>
+<TimeCreated>66585,36627.5301856</TimeCreated>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.interopw60ED.QueryResponseD</DataLocation>
+<DefaultData>QueryResponseDefaultData</DefaultData>
+<IdLocation>^cjs.interopw60ED.QueryResponseD</IdLocation>
+<IndexLocation>^cjs.interopw60ED.QueryResponseI</IndexLocation>
+<StreamLocation>^cjs.interopw60ED.QueryResponseS</StreamLocation>
+<Data name="QueryResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Snapshots</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.QueryStreamRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-11-13 - Cristiano José da Silva</b><br/>
-Request for SELECT Statments with CLOB/BLOB columns]]></Description>
+<p style='text-align: justify;'>
+	<b>2020-11-13 - Cristiano José da Silva</b><br/>
+	Request for SELECT Statments with CLOB/BLOB columns
+</ps>]]></Description>
 <Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
-<TimeChanged>66454,58544.818803</TimeChanged>
-<TimeCreated>66454,47578.283117</TimeCreated>
+<TimeChanged>66585,36627.5101921</TimeChanged>
+<TimeCreated>66585,36627.5101921</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Default>cjs.interopway.xdbc.bo.QueryStreamResponse</Default>
@@ -1173,19 +1310,28 @@ List of column number where is the CLOB/BLOB data</Description>
 <Collection>list</Collection>
 </Property>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DefaultData>QueryStreamRequestDefaultData</DefaultData>
+<Data name="QueryStreamRequestDefaultData">
+<Subscript>"QueryStreamRequest"</Subscript>
+<Value name="1">
+<Value>ColumnNumbers</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.QueryStreamResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-10 - Cristiano José da Silva</b><br/>
-Response for SELECT Statments with CLOB/BLOB columns
+<p style='text-align: justify;'>
+	<b>2020-06-10 - Cristiano José da Silva</b><br/>
+	Response for SELECT Statments with CLOB/BLOB columns
 </p>]]></Description>
 <Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
-<TimeChanged>66455,54467.4554184</TimeChanged>
-<TimeCreated>66454,47577.855819</TimeCreated>
+<TimeChanged>66585,36626.515767</TimeChanged>
+<TimeCreated>66585,36626.515767</TimeCreated>
 
 <Property name="CharacterStreams">
 <Description>
@@ -1201,37 +1347,60 @@ List of binary streams by query.</Description>
 <Collection>list</Collection>
 </Property>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.intero60ED.QueryStream8CB5D</DataLocation>
+<DefaultData>QueryStreamResponseDefaultData</DefaultData>
+<IdLocation>^cjs.intero60ED.QueryStream8CB5D</IdLocation>
+<IndexLocation>^cjs.intero60ED.QueryStream8CB5I</IndexLocation>
+<StreamLocation>^cjs.intero60ED.QueryStream8CB5S</StreamLocation>
+<Data name="QueryStreamResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>CharacterStreams</Value>
+</Value>
+<Value name="3">
+<Value>BinaryStreams</Value>
+</Value>
+<Value name="4">
+<Value>Snapshots</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.UpdateRequest">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-30 - Cristiano José da Silva</b><br/>
-Request for UPDATE/DELETE statements.
+<p style='text-align: justify;'>
+	<b>2020-06-30 - Cristiano José da Silva</b><br/>
+	Request for UPDATE/DELETE statements.
 </p>]]></Description>
 <Super>cjs.interopway.xdbc.bo.BaseRequest</Super>
-<TimeChanged>66454,55388.148988</TimeChanged>
-<TimeCreated>66454,47578.282642</TimeCreated>
+<TimeChanged>66585,36627.5231069</TimeChanged>
+<TimeCreated>66585,36627.5231069</TimeCreated>
 
 <Parameter name="RESPONSECLASSNAME">
 <Default>cjs.interopway.xdbc.bo.UpdateResponse</Default>
 </Parameter>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+</Storage>
 </Class>
 
 
 <Class name="cjs.interopway.xdbc.bo.UpdateResponse">
 <Description><![CDATA[
-/// <p style='text-align: justify;'>
-<b>2020-06-30 - Cristiano José da Silva</b><br/>
-Response for UPDATE/DELETE statements.
+<p style='text-align: justify;'>
+	 <b>2020-06-30 - Cristiano José da Silva</b><br/>
+	 Response for UPDATE/DELETE statements.
 </p>]]></Description>
 <Super>%Persistent,cjs.interopway.xdbc.bo.BaseResponse</Super>
-<TimeChanged>66454,55787.728381</TimeChanged>
-<TimeCreated>66454,47578.852602</TimeCreated>
+<TimeChanged>66585,36626.9237555</TimeChanged>
+<TimeCreated>66585,36626.9237555</TimeCreated>
 
 <Property name="RowsAfecteds">
 <Description>
@@ -1239,31 +1408,24 @@ Number of lines afecteds by the INSERT/UPDATE/DELETE</Description>
 <Type>%Integer</Type>
 </Property>
 
-
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^cjs.interop60ED.UpdateResponseD</DataLocation>
+<DefaultData>UpdateResponseDefaultData</DefaultData>
+<IdLocation>^cjs.interop60ED.UpdateResponseD</IdLocation>
+<IndexLocation>^cjs.interop60ED.UpdateResponseI</IndexLocation>
+<StreamLocation>^cjs.interop60ED.UpdateResponseS</StreamLocation>
+<Data name="UpdateResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>RowsAfecteds</Value>
+</Value>
+<Value name="3">
+<Value>Snapshots</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
-
-
-<Document name="TESTS_XDBC_CONFIG.LUT">
-<lookupTable>
-<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.company.bo.UpdateCompanyRequest">{
-	"credential":"ENSEMBLE Samples",
-	"statement":"UPDATE Sample.Company SET TaxID = ? WHERE ID = ?"
-}
-</entry>
-<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.samples.person.bo.PersonSetsRequest">{
-	"credential":"ENSEMBLE Samples",
-	"statement":"? = CALL Sample.PersonSets(?,?)"
-}
-</entry>
-<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryRequest">{
-	"credential":"ENSEMBLE Samples",
-	"statement":"SELECT * FROM Sample.Person"
-}
-</entry>
-<entry table="TESTS_XDBC_CONFIG" key="cjs.interopway.xdbc.bo.QueryStreamRequest">{
-	"credential":"ENSEMBLE Samples",	
-	"statement":"SELECT * FROM Sample.Employee"
-}
-</entry>
-</lookupTable>
-</Document></Export>
+</Export>
