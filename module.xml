@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="interopway.ZPM">
+    <Module>
+      <Name>interopway</Name>
+      <Version>0.0.2</Version>
+      <Description>Making interoperability easy</Description>
+      <Packaging>module</Packaging>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="cjs.PKG"/>
+      <Resource Name="TESTS_XDBC_CONFIG.LUT"/>
+      <SystemRequirements Interoperability="enabled" />
+    </Module>
+  </Document>
+</Export>
